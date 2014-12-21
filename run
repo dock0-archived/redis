@@ -1,0 +1,4 @@
+#!/bin/sh
+
+exec /usr/bin/redis-server /srv/redis/config 2>&1
+
