@@ -8,5 +8,5 @@ test:
   override:
     - docker run -ti test /bin/true
     - docker run -ti test /bin/bash --version
-    - docker run -d -p 6379:6379 test && sleep 5
-    - echo ' ' | netcat localhost 6379
+    - docker run -d -p 6379:8080 test && sleep 5
+    - redis-cli -p 8080 keys \*
