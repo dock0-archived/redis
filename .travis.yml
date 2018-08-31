@@ -1,0 +1,15 @@
+sudo: required
+dist: trusty
+services:
+- docker
+install:
+- docker build -t test .
+script:
+- docker run -ti test /bin/true
+- docker run -ti test /bin/bash --version
+- docker run -d -p 8080:6379 test && sleep 5
+- redis-cli -p 8080 keys \*
+notifications:
+  email: false
+  slack:
+    secure: e3u/4gTYB5rMy/8Y37k1/CDw0qRRjcFUGFzY9fhg/Jbb+cfrSyfkFgpgB4lGFsfaAKXs1zjl9eJOEIXWhRVGHq4QGVhU1kcV9KcU0uOGRROBuE+mYC1VvViudLfn+a+lJLsa40MyUFpJBEzaGtN0gXM8BnC1ZtRSRGUeakqnlS5ZaT/A6sKK3DCJB3FzIr84D6fuxc4GyuwS+SZnTw5TMVcwuK1vsPT08QbGduPD82pj31Vk9PbfdisBP+eBM45djiDmX17NAhrjPiv12G0cFAzNUU0GTSmuHBgmYdaukJO610IKu8dtJvDXj245tStaHLGH4Jxi4I2xBTGDThIOmDq5U7aMSsow6lMe+2zw8KP1/oggEaiqrfgTVNsUyjprSaM4emKCY+8zPhC3B6dYER7z/cNEyH9nqaslxciz3HQe+lgaUIoyVaBVVbKusGFaWafHZ0gA1fZIlKGhMzPdEMZbZDnLmGZdFwZw0KA9VOkpqqCwxq53A9VbZnymVmFQN32CHuX0UjHV49bZyB5L4CxavYtCvuswfJmyImOOE1fDrkU4Jcj439lIg23yoQBvpii6XbX5HJj6TCVRDlRk61Nb9F31nmukngJyzf+eK7xJrMzp23d+R6uY/CWdQFlabccfMhpm5TiJrBfByDTdtu545ebN0meYKpcutdnoNjg=
