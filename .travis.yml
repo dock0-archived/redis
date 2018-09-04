@@ -4,10 +4,10 @@ services:
 - docker
 install:
 - docker build -t test .
+- docker run -d -p 8080:6379 test
 script:
 - docker run -ti test /bin/true
 - docker run -ti test /bin/bash --version
-- docker run -d -p 8080:6379 test && sleep 5
 - redis-cli -p 8080 keys \*
 notifications:
   email: false
